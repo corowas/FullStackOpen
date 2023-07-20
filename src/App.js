@@ -1,33 +1,74 @@
-// const Hello = (props) => {
-//   console.log(props)
-//   return (
-//    <div>
-//     <p>
-//       Hello {props.name}, you are {props.age} years old
-//       </p>
-//    </div>
-//   )
+import { useState } from 'react'
+
+const Display = props => <tr><td>{props.text}</td><td> {props.value}</td></tr>
+// const Total = ({clicks}) => {
+//   total = clicks.good + clicks.bad + clicks.neutral
+//   clicks.bad = clicks.bad * -1
+//   tempTotal = clicks.good + clicks.bad
+
 // }
-// const Footer = () => {
-//   return (
-//     <div>
-//       greeting app created by <a href='https://github.com/mluukai'>mluukkai</a>
-//     </div>
-//   )
-// }
-const App = () => {
-  const friends = [
-    {name: 'Peter', age: 4 },
-    {name: 'Janet', age: 82 },
-  ]
+
+const Button = ({handleClick, text}) => {
+  console.log("clicked")
+  return(
+<button onClick={handleClick} text={text}>{text}</button>
+
+  )
+ 
+}
+const Statistics = ({clicks}) => {
+  let total = clicks.good + clicks.bad + clicks.neutral
+  let newBad = clicks.bad * -1
+  let avg = (clicks.good + newBad) / total
+  let posAvg = clicks.good / total
+  if (total === 0) {
+    return(
+      <div>
+        Please click a buttton
+      </div>
+    )
+    
+  } else {
+ return(
+  <div>
+    <table>
+      <tbody>
+      <Display text="good" value={clicks.good} />
+      <Display text="bad" value ={clicks.bad} />
+      <Display text="neutral" value={clicks.neutral} />
+      <Display text="total Clicks" value={total} />
+      <Display text="Average" value={avg} />
+      <Display text="Positive Average" value={posAvg} />
+      </tbody>
+      </table>
+      </div>
+      )}
+}
+const App = (props) => {
+  const [clicks, setClicks] = useState ({
+    good:0, bad:0, neutral:0
+  })
+  
+
+  const handleGoodClick = () =>
+    setClicks({...clicks, good: clicks.good + 1})
+  const handleBadClick = () => 
+    setClicks({...clicks, bad: clicks.bad +1})
+    const handleNeutralClicks = () =>
+    setClicks({...clicks, neutral: clicks.neutral + 1})
+  
 
 
-  return (
+  return(
     <div>
-     <p>this is my friend {friends[0].name} he is {friends[0].age} years old</p>
-     <p>{friends[1].name} {friends[1].age}</p>
+      <Button handleClick={handleGoodClick} text="good" />
+      <Button handleClick={handleBadClick} text="bad" />
+      <Button handleClick={handleNeutralClicks} text="neutral" />
+      <h1>Statistics</h1>
+      <Statistics clicks={clicks} />
+      
 
-    </div>
+</div>
   )
 }
 
