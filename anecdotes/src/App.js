@@ -3,7 +3,7 @@ import './App.css'
 
 const ShowAnecdote = ({anecdote, vote, handleVote, handleSelect}) => {
   return(
-<div>
+<div> 
   <p>{anecdote}</p>
   <p>Has {vote} votes </p>
 
