@@ -1,8 +1,9 @@
 import {useState} from 'react'
+import './App.css'
 
 const ShowAnecdote = ({anecdote, vote, handleVote, handleSelect}) => {
   return(
-<div> 
+<div>
   <p>{anecdote}</p>
   <p>Has {vote} votes </p>
 
@@ -50,7 +51,9 @@ const App = () => {
   }
   
   return (
+
     <div>
+
     <ShowAnecdote 
     anecdote={anecdotes[selected]}
     vote={points[selected]}
